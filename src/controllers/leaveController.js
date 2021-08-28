@@ -5,6 +5,7 @@ const User = require('../models/user')
 exports.getAllLeaveRequest =async (req, reply)=>{
     const userId = req.params.id
     try {
+        if(!userId)return reply.send({message: 'userId is required', errorField: 'userId'})
         Leave.find({requestedBy: userId})
         .then((doc)=> {
             return reply.send(doc)
